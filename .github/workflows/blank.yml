@@ -18,7 +18,7 @@ jobs:
           sudo apt install wget -y
           wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip
           unzip platform-tools-latest-linux.zip -d ~
-          echo '\n# add Android SDK platform tools to path\nif [ -d "$HOME/platform-tools" ] ; then\n    PATH="$HOME/platform-tools:$PATH"\nfi' >> ~/.profile
+          echo -e '\n# add Android SDK platform tools to path\nif [ -d "$HOME/platform-tools" ] ; then\n    PATH="$HOME/platform-tools:$PATH"\nfi' >> ~/.profile
           source ~/.profile
 
       - name: Preparing your system to build
