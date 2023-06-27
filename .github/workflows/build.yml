@@ -55,10 +55,18 @@ jobs:
         run: |
           export USE_CCACHE=1
           export CCACHE_EXEC=/usr/bin/ccache
+          ccache -M 50G
         
-      - name: 
+      - name: Start the build
         run: |
-        
-      - name: 
-        run: |
+          cd ~/android/pe
+          croot
+          mka bacon -j$(nproc --all)
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: |
+            $OUT/recovery.img
+            $OUT/PixelExperience_*.zip
         
