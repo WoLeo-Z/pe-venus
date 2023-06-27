@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install the platform-tools
+        run: |
+          sudo apt install wget -y
+          wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip
+          unzip platform-tools-latest-linux.zip -d ~
+          echo '\n# add Android SDK platform tools to path\nif [ -d "$HOME/platform-tools" ] ; then\n    PATH="$HOME/platform-tools:$PATH"\nfi' >> ~/.profile
+          source ~/.profile
+
+      - name: Preparing your system to build
+        run: |
+          sudo apt update -y
+          sudo apt install git -y
+          cd ~/
+          git clone https://github.com/akhilnarang/scripts
+          cd scripts
+          ./setup/android_build_env.sh
+          mkdir -p ~/bin
+          mkdir -p ~/android/pe
+          curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+          chmod a+x ~/bin/repo
+        
+      - name: 
+        run: |
+          
+      - name: 
+        run: |
+        
+      - name: 
+        run: |
