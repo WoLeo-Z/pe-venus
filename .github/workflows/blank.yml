@@ -33,12 +33,32 @@ jobs:
           mkdir -p ~/android/pe
           curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
           chmod a+x ~/bin/repo
+          git config --global user.email "1141783989zh@gmail.com"
+          git config --global user.name "WoLeo-Z"
         
-      - name: 
+      - name: Initialize the PixelExperience source repository
         run: |
+          cd ~/android/pe
+          repo init -u https://github.com/PixelExperience/manifest -b thirteen-plus
           
+      - name: Download the source code
+        run: |
+          repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+        
+      - name: Prepare the device-specific code
+        run: |
+          cd ~/android/pe
+          source build/envsetup.sh
+          lunch aosp_venus-userdebug
+        
+      - name: Turn on caching to speed up build
+        run: |
+          export USE_CCACHE=1
+          export CCACHE_EXEC=/usr/bin/ccache
+        
       - name: 
         run: |
         
       - name: 
         run: |
+        
