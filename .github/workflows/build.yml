@@ -36,13 +36,10 @@ jobs:
           git config --global user.email "1141783989zh@gmail.com"
           git config --global user.name "WoLeo-Z"
         
-      - name: Initialize the PixelExperience source repository
+      - name: Initialize & Download the source code
         run: |
           cd ~/android/pe
           repo init -u https://github.com/PixelExperience/manifest -b thirteen-plus
-          
-      - name: Download the source code
-        run: |
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
         
       - name: Prepare the device-specific code
